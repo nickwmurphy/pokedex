@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import './App.css';
 
-export default class Loader extends Component {
+const Loader = ({
+  isLoading
+}) => {
 
-  render() {
-    return (
-      <div className={this.props.isLoading}></div>
-    );
-  }
+  return (
+    <div className={isLoading}></div>
+  );
 }
+
+Loader.propTypes = {
+  isLoading: PropTypes.string
+};
+
+Loader.defaultProps = {
+  isLoading: ''
+};
+
+export default Loader;

@@ -1,19 +1,57 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import './App.css';
 
-export default class Card extends Component {
+const Card = ({
+  name,
+  type,
+  frontSprite,
+  backSprite
+}) => {
 
-  render() {
-    return (
-      <div>
-        <span>Name: <strong>{this.props.name}</strong></span>
-        <br/><br/>
-        <span>Type: <strong>{this.props.type}</strong></span>
-        <br/><br/>
-        <img width="200px" alt="" src={this.props.frontSprite}/>
-        <img width="200px" alt="" src={this.props.backSprite}/>
-        <br/><br/>
-      </div>
-    );
-  }
-}
+  const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
+
+  const _name = (<span>Name:
+      <strong>
+        {capitalize(name)}
+      </strong>
+    </span>);
+
+  const _type = (<span>Type:
+      <strong>
+        {capitalize(type)}
+      </strong>
+    </span>);
+
+  const front = (
+    <img width='200px' alt='' src={frontSprite}/>
+  );
+
+  const back = (
+    <img width='200px' alt='' src={backSprite}/>
+  );
+
+  return (
+    <div>
+      {_name}
+      {_type}
+      {front}
+      {back}
+    </div>
+  );
+};
+
+Card.propTypes = {
+  name: PropTypes.string,
+  type: PropTypes.string,
+  frontSprite: PropTypes.string,
+  backSprite: PropTypes.string
+};
+
+Card.defaultProps = {
+  name: '',
+  type: '',
+  frontSprite: '',
+  backSprite: ''
+};
+
+export default Card;
