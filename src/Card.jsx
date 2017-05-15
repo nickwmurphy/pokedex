@@ -11,19 +11,13 @@ const Card = ({
   const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
   const _name = (<div className='name'>
-      <span>Name:
-        <strong>
-          {` ${capitalize(name)}`}
-        </strong>
-      </span>
+      <span>Name:</span>
+      <strong>{` ${capitalize(name)}`}</strong>
     </div>);
 
   const _type = (<div className='type'>
-      <span>Type:
-        <strong>
-          {` ${capitalize(type)}`}
-        </strong>
-      </span>
+      <span>Type:</span>
+      <strong>{` ${capitalize(type)}`}</strong>
     </div>);
 
   const front = (

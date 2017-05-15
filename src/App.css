@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.container {
+.search {
   display: flex;
   flex-direction: column;
   max-width: 300px;

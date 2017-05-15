@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import './App.css';
-import Loader from './Loader.jsx';
-import Card from './Card.jsx';
 
-const api = 'http://pokeapi.co/api/v2/pokemon';
+import Card from './Card.jsx';
+import Loader from './Loader.jsx';
+import Search from './Search.jsx';
+
+import './App.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class App extends Component {
   };
 
   search = input => {
+    const api = 'http://pokeapi.co/api/v2/pokemon';
     Axios.get(`${api}/${input}/`)
       .then(response => {
         this.displayResult(response.data);
@@ -53,11 +55,9 @@ export default class App extends Component {
         />)
       : null;
 
-    const input = (<div className='container'>
-      Search a Pokemon by name or number:
-      <input className='input' type="text" onChange={this.updateInputValue}/>
-      </div>
-    );
+    const input = (<Search
+      updateInputValue={this.updateInputValue}
+    />);
 
     const loader = (<Loader
       isLoading={this.state.loading}
