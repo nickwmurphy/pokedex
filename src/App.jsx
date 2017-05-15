@@ -9,10 +9,8 @@ const api = 'http://pokeapi.co/api/v2/pokemon';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: ''
-    };
-  }
+    this.state = { };
+  };
 
   displayResult = data => {
     this.setState({
@@ -22,7 +20,7 @@ export default class App extends Component {
       type: data.types[0].type.name,
       loading: ''
     });
-  }
+  };
 
   search = input => {
     Axios.get(`${api}/${input}/`)
@@ -46,16 +44,18 @@ export default class App extends Component {
 
   render() {
 
-    const card = (<Card
-      name={this.state.name}
-      type={this.state.type}
-      frontSprite={this.state.frontSprite}
-      backSprite={this.state.backSprite}
-    />);
+    const card = this.state.loading === ''
+      ? (<Card
+          name={this.state.name}
+          type={this.state.type}
+          frontSprite={this.state.frontSprite}
+          backSprite={this.state.backSprite}
+        />)
+      : null;
 
-    const input = (<div>
-      Search a Pokemon by name or number (1 to 151 only):
-      <input type="text" onChange={this.updateInputValue}/>
+    const input = (<div className='container'>
+      Search a Pokemon by name or number:
+      <input className='input' type="text" onChange={this.updateInputValue}/>
       </div>
     );
 

@@ -10,17 +10,21 @@ const Card = ({
 
   const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
-  const _name = (<span>Name:
-      <strong>
-        {capitalize(name)}
-      </strong>
-    </span>);
+  const _name = (<div className='name'>
+      <span>Name:
+        <strong>
+          {` ${capitalize(name)}`}
+        </strong>
+      </span>
+    </div>);
 
-  const _type = (<span>Type:
-      <strong>
-        {capitalize(type)}
-      </strong>
-    </span>);
+  const _type = (<div className='type'>
+      <span>Type:
+        <strong>
+          {` ${capitalize(type)}`}
+        </strong>
+      </span>
+    </div>);
 
   const front = (
     <img width='200px' alt='' src={frontSprite}/>
@@ -31,11 +35,13 @@ const Card = ({
   );
 
   return (
-    <div>
+    <div className='card'>
       {_name}
       {_type}
-      {front}
-      {back}
+      <div className='sprites'>
+        {front}
+        {back}
+      </div>
     </div>
   );
 };
