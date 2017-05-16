@@ -24,7 +24,7 @@ export default class App extends Component {
   };
 
   search = input => {
-    const api = 'http://pokeapi.co/api/v2/pokemon';
+    const api = 'https://pokeapi.co/api/v2/pokemon';
     Axios.get(`${api}/${input}/`)
       .then(response => {
         this.displayResult(response.data);
