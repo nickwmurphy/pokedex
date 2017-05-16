@@ -8,7 +8,7 @@ const Search = ({
   return (
     <div className='search'>
       <span>Search a Pokemon by number:</span>
-      <input className='input' type='number' onChange={updateInputValue}/>
+      <input className='input' type='number' pattern='[0-9]*' onChange={updateInputValue}/>
     </div>
   );
 };
