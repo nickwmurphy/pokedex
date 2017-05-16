@@ -7,8 +7,8 @@ const Search = ({
 
   return (
     <div className='search'>
-      <span>Search a Pokemon by name or number:</span>
-      <input className='input' type='text' onChange={updateInputValue}/>
+      <span>Search a Pokemon by number:</span>
+      <input className='input' type='number' onChange={updateInputValue}/>
     </div>
   );
 };
