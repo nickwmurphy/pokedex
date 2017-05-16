@@ -15,11 +15,11 @@ const Card = ({
     </div>);
 
   const front = (
-    <img width='200px' alt='' src={frontSprite}/>
+    <img width='150px' alt='' src={frontSprite}/>
   );
 
   const back = (
-    <img width='200px' alt='' src={backSprite}/>
+    <img width='150px' alt='' src={backSprite}/>
   );
 
   return (
