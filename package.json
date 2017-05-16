@@ -11,7 +11,8 @@
     "react-dom": "^15.5.4"
   },
   "engines": {
-    "npm": "6.x"
+    "node": "6.x",
+    "npm": "3.x"
   },
   "scripts": {
     "start": "react-scripts start"
