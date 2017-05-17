@@ -9,6 +9,11 @@
   margin: 0 auto;
 }
 
+.error {
+  color: red;
+  font-size: 10px;
+}
+
 .search {
   margin: 0 auto;
   display: flex;
@@ -17,7 +22,7 @@
 }
 
 .input {
-  margin: 30px 0;
+  margin: 20px 0 5px 0;
 }
 
 .isLoading {
@@ -37,14 +42,8 @@
   width: 300px;
 }
 
-.type {
-  margin-top: 30px;
-  margin: 0 auto;
-}
-
 .name {
-  margin-top: 30px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
 }
 
 @keyframes spin {

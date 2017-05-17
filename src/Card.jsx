@@ -15,13 +15,9 @@ const Card = ({
       <strong>{`${capitalize(name)} - ${capitalize(type)}`}</strong>
     </div>);
 
-  const front = (
-    <img width='150px' alt='' src={frontSprite}/>
-  );
+  const front = <img width='150px' alt='' src={frontSprite}/>;
 
-  const back = (
-    <img width='150px' alt='' src={backSprite}/>
-  );
+  const back = <img width='150px' alt='' src={backSprite}/>;
 
   return (
     <div className='card'>

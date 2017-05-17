@@ -56,19 +56,24 @@ export default class App extends Component {
   updateInputValue = e => {
     let input = e.target.value.toLowerCase();
     if (input && input > 0 && input <= 721) {
-      this.search(input);
       this.setState({
         backSprite: '',
         frontSprite: '',
         name: '',
         type: '',
-        loading: 'isLoading'
+        loading: 'isLoading',
+        input: input
+      });
+      this.search(input);
+    } else {
+      this.setState({
+        input: input
       });
     }
   };
 
   render() {
-    const card = this.state.loading === ''
+    const card = (this.state.loading === '' && this.state.input > 0 && this.state.input <= 721)
       ? (<Card
           name={this.state.name}
           type={this.state.type}
@@ -78,6 +83,7 @@ export default class App extends Component {
       : null;
     const input = (<Search
       updateInputValue={this.delayedUpdateInputValue}
+      input={this.state.input}
     />);
     const loader = (<Loader
       isLoading={this.state.loading}
