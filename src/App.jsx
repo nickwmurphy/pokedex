@@ -10,7 +10,28 @@ import './App.css';
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.updateInputValue = this.debounce(this.updateInputValue, 750);
     this.state = { };
+  };
+
+  debounce = (func, wait, immediate) => {
+    let timeout;
+    return function() {
+      let context = this, args = arguments;
+      let later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      let callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  delayedUpdateInputValue = e => {
+    e.persist();
+    this.updateInputValue(e);
   };
 
   displayResult = data => {
@@ -33,19 +54,20 @@ export default class App extends Component {
   };
 
   updateInputValue = e => {
-    this.setState({
-      backSprite: '',
-      frontSprite: '',
-      name: '',
-      type: '',
-      loading: 'isLoading'
-    });
     let input = e.target.value.toLowerCase();
-    this.search(input);
+    if (input && input > 0 && input <= 721) {
+      this.search(input);
+      this.setState({
+        backSprite: '',
+        frontSprite: '',
+        name: '',
+        type: '',
+        loading: 'isLoading'
+      });
+    }
   };
 
   render() {
-
     const card = this.state.loading === ''
       ? (<Card
           name={this.state.name}
@@ -54,15 +76,12 @@ export default class App extends Component {
           backSprite={this.state.backSprite}
         />)
       : null;
-
     const input = (<Search
-      updateInputValue={this.updateInputValue}
+      updateInputValue={this.delayedUpdateInputValue}
     />);
-
     const loader = (<Loader
       isLoading={this.state.loading}
     />);
-
     return (
       <div className='container'>
         {input}
