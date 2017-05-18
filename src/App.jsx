@@ -11,7 +11,15 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.updateInputValue = this.debounce(this.updateInputValue, 750);
-    this.state = { };
+    this.state = {
+      backSprite: '',
+      badInput: false,
+      frontSprite: '',
+      hasInput: false,
+      loading: false,
+      name: '',
+      type: ''
+    };
   };
 
   debounce = (func, wait, immediate) => {
@@ -38,9 +46,9 @@ export default class App extends Component {
     this.setState({
       backSprite: data.sprites.back_default,
       frontSprite: data.sprites.front_default,
+      loading: false,
       name: data.name,
-      type: data.types[0].type.name,
-      loading: ''
+      type: data.types[0].type.name
     });
   };
 
@@ -55,42 +63,51 @@ export default class App extends Component {
 
   updateInputValue = e => {
     let input = e.target.value.toLowerCase();
-    if (input && input > 0 && input <= 721) {
-      this.setState({
-        backSprite: '',
-        frontSprite: '',
-        name: '',
-        type: '',
-        loading: 'isLoading',
-        input: input
-      });
-      this.search(input);
+    if (input) {
+      if (input > 0 && input <= 721) {
+        this.setState({
+          backSprite: '',
+          badInput: false,
+          frontSprite: '',
+          hasInput: true,
+          loading: true,
+          name: '',
+          type: ''
+        });
+        this.search(input);
+      } else {
+        this.setState({
+          badInput: true,
+          hasInput: true
+        });
+      }
     } else {
       this.setState({
-        input: input
+        hasInput: false
       });
     }
   };
 
   render() {
-    const card = (this.state.loading === '' && this.state.input > 0 && this.state.input <= 721)
+    const card = (this.state.hasInput && !this.state.badInput && !this.state.loading)
       ? (<Card
+          backSprite={this.state.backSprite}
+          frontSprite={this.state.frontSprite}
           name={this.state.name}
           type={this.state.type}
-          frontSprite={this.state.frontSprite}
-          backSprite={this.state.backSprite}
         />)
       : null;
-    const input = (<Search
+    const search = (<Search
+      badInput={this.state.badInput}
+      hasInput={this.state.hasInput}
       updateInputValue={this.delayedUpdateInputValue}
-      input={this.state.input}
     />);
     const loader = (<Loader
-      isLoading={this.state.loading}
+      loading={this.state.loading}
     />);
     return (
       <div className='container'>
-        {input}
+        {search}
         {card}
         {loader}
       </div>

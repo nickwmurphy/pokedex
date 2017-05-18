@@ -3,20 +3,24 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 const Loader = ({
-  isLoading
+  loading
 }) => {
 
+  const spinner = loading
+    ? <div className='spinner'></div>
+    : null;
+
   return (
-    <div className={isLoading}></div>
+    <div>
+      {spinner}
+    </div>
   );
 }
 
 Loader.propTypes = {
-  isLoading: PropTypes.string
+  loading: PropTypes.bool.isRequired
 };
 
-Loader.defaultProps = {
-  isLoading: ''
-};
+Loader.defaultProps = { };
 
 export default Loader;

@@ -3,25 +3,25 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 const Card = ({
-  name,
-  type,
+  backSprite,
   frontSprite,
-  backSprite
+  name,
+  type
 }) => {
-
-  const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
-
-  const _name = (<div className='name'>
-      <strong>{`${capitalize(name)} - ${capitalize(type)}`}</strong>
-    </div>);
-
-  const front = <img width='150px' alt='' src={frontSprite}/>;
 
   const back = <img width='150px' alt='' src={backSprite}/>;
 
+  const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
+
+  const front = <img width='150px' alt='' src={frontSprite}/>;
+
+  const label = (<div className='label'>
+      {`${capitalize(name)} - ${capitalize(type)}`}
+    </div>);
+
   return (
     <div className='card'>
-      {_name}
+      {label}
       <div className='sprites'>
         {front}
         {back}
@@ -31,17 +31,12 @@ const Card = ({
 };
 
 Card.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
+  backSprite: PropTypes.string,
   frontSprite: PropTypes.string,
-  backSprite: PropTypes.string
+  name: PropTypes.string,
+  type: PropTypes.string
 };
 
-Card.defaultProps = {
-  name: '',
-  type: '',
-  frontSprite: '',
-  backSprite: ''
-};
+Card.defaultProps = { };
 
 export default Card;

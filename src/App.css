@@ -5,8 +5,8 @@
 }
 
 .container {
-  width: 100%;
-  margin: 0 auto;
+  margin: 40px auto;
+  width: 300px;
 }
 
 .error {
@@ -14,36 +14,36 @@
   font-size: 10px;
 }
 
+.input {
+  margin-top: 20px;
+  width: 120px;
+}
+
+.label {
+  font-weight: 900;
+}
+
 .search {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  margin: 0 auto 20px auto;
 }
 
-.input {
-  margin: 20px 0 5px 0;
-}
-
-.isLoading {
+.spinner {
   animation: spin 2s linear infinite;
-  box-sizing: border-box;
+  border-radius: 50%;
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #ee1515; /* Red */
-  border-radius: 50%;
+  box-sizing: border-box;
   height: 120px;
-  width: 120px;
   margin: 60px auto;
+  width: 120px;
 }
 
 .sprites {
-  margin: 30px auto;
   display: inline-block;
-  width: 300px;
-}
-
-.name {
   margin: 20px auto 0 auto;
+  width: 300px;
 }
 
 @keyframes spin {

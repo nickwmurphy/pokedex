@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import './App.css';
 
 const Search = ({
-  input,
+  badInput,
+  hasInput,
   updateInputValue
 }) => {
 
-  const error = (input && (input < 1 || input > 721))
+  const error = (hasInput && badInput)
     ? <span className='error'>Search a number 1 to 721</span>
     : null;
 
   return (
     <div className='search'>
       <span>Search a Pokemon by number:</span>
-      <input className='input' type='number' pattern='[0-9]*' onChange={updateInputValue}/>
+      <input className='input' type='number' pattern='[0-9]*' onChange={updateInputValue} />
       {error}
     </div>
   );
 };
 
 Search.propTypes = {
+  badInput: PropTypes.bool.isRequired,
+  hasInput: PropTypes.bool.isRequired,
   updateInputValue: PropTypes.func.isRequired
 };
 
