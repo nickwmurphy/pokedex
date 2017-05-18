@@ -32,7 +32,7 @@
 .spinner {
   animation: spin 2s linear infinite;
   border-radius: 50%;
-  border: 16px solid #f3f3f3; /* Light grey */
+  border: 16px solid #e3e3e3; /* Light grey */
   border-top: 16px solid #ee1515; /* Red */
   box-sizing: border-box;
   height: 120px;
