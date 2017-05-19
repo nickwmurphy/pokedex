@@ -4,13 +4,6 @@
   margin: 0 auto;
 }
 
-.clear {
-  background: #f7f7f7;
-  border-width: 0;
-  color: blue;
-  margin-left: 20px;
-}
-
 .container {
   margin: 40px auto;
   width: 300px;
