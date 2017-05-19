@@ -25,7 +25,7 @@ const Search = ({
           pattern='[0-9]*'
           type='number'
           value={inputValue}
-          />
+        />
         {clear}
       </div>
       {error}
