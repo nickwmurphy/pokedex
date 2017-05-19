@@ -18,8 +18,8 @@ const Search = ({
       <div>
         <input className='input'
           onChange={updateInputValue}
-          type='number'
           pattern='[0-9]*'
+          type='number'
           />
       </div>
       {error}
