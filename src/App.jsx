@@ -16,10 +16,18 @@ export default class App extends Component {
       badInput: false,
       frontSprite: '',
       hasInput: false,
+      inputValue: '',
       loading: false,
       name: '',
       type: ''
     };
+  };
+
+  clearInput = () => {
+    this.setState({
+      inputValue: '',
+      hasInput: false
+    });
   };
 
   debounce = (func, wait, immediate) => {
@@ -71,6 +79,7 @@ export default class App extends Component {
           badInput: false,
           frontSprite: '',
           hasInput: true,
+          inputValue: input,
           loading: true,
           name: '',
           type: ''
@@ -80,10 +89,11 @@ export default class App extends Component {
         this.setState({
           badInput: true,
           hasInput: true,
+          inputValue: input
         });
       }
     } else {
-      this.setState({ hasInput: false });
+      this.setState({ hasInput: false, inputValue: '' });
     }
   };
 
@@ -98,8 +108,10 @@ export default class App extends Component {
       : null;
     const search = (<Search
       badInput={this.state.badInput}
+      clearInput={this.clearInput}
       hasInput={this.state.hasInput}
       updateInputValue={this.delayedUpdateInputValue}
+      inputValue={this.state.inputValue}
     />);
     const loader = (<Loader
       loading={this.state.loading}

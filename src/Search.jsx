@@ -4,9 +4,13 @@ import './App.css';
 
 const Search = ({
   badInput,
+  clearInput,
   hasInput,
+  inputValue,
   updateInputValue
 }) => {
+
+  const clear = <button className='clear' onClick={clearInput}>Clear</button>
 
   const error = (hasInput && badInput)
     ? <span className='error'>Search a number 1 to 721</span>
@@ -18,9 +22,11 @@ const Search = ({
       <div>
         <input className='input'
           onChange={updateInputValue}
-          type='number'
           pattern='[0-9]*'
+          type='number'
+          value={inputValue}
           />
+        {clear}
       </div>
       {error}
     </div>
@@ -29,7 +35,9 @@ const Search = ({
 
 Search.propTypes = {
   badInput: PropTypes.bool.isRequired,
+  clearInput: PropTypes.func.isRequired,
   hasInput: PropTypes.bool.isRequired,
+  inputValue: PropTypes.string,
   updateInputValue: PropTypes.func.isRequired
 };
 
