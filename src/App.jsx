@@ -16,10 +16,18 @@ export default class App extends Component {
       badInput: false,
       frontSprite: '',
       hasInput: false,
+      inputValue: '',
       loading: false,
       name: '',
       type: ''
     };
+  };
+
+  clearInput = () => {
+    this.setState({
+      inputValue: '',
+      hasInput: false
+    });
   };
 
   debounce = (func, wait, immediate) => {
@@ -39,6 +47,7 @@ export default class App extends Component {
 
   delayedUpdateInputValue = e => {
     e.persist();
+    //console.log(e)
     this.updateInputValue(e);
   };
 
@@ -62,29 +71,31 @@ export default class App extends Component {
   };
 
   updateInputValue = e => {
-    let input = e.target.value.toLowerCase();
+    e.preventDefault();
+    let input = e.target.value;
+    console.log(e)
     if (input) {
-      if (input > 0 && input <= 721) {
+     if (input > 0 && input <= 721) {
         this.setState({
           backSprite: '',
           badInput: false,
           frontSprite: '',
           hasInput: true,
+          inputValue: input,
           loading: true,
           name: '',
           type: ''
-        });
+       });
         this.search(input);
       } else {
         this.setState({
           badInput: true,
-          hasInput: true
+          hasInput: true,
+          inputValue: input
         });
       }
     } else {
-      this.setState({
-        hasInput: false
-      });
+      this.setState({ hasInput: false, inputValue: '' });
     }
   };
 
@@ -99,12 +110,15 @@ export default class App extends Component {
       : null;
     const search = (<Search
       badInput={this.state.badInput}
+      clearInput={this.clearInput}
       hasInput={this.state.hasInput}
       updateInputValue={this.delayedUpdateInputValue}
+      inputValue={this.state.inputValue}
     />);
     const loader = (<Loader
       loading={this.state.loading}
     />);
+
     return (
       <div className='container'>
         {search}
