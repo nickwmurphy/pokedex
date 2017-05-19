@@ -31,10 +31,10 @@ const Card = ({
 };
 
 Card.propTypes = {
-  backSprite: PropTypes.string,
-  frontSprite: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string
+  backSprite: PropTypes.string, // not all have a back sprite
+  frontSprite: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 Card.defaultProps = { };
