@@ -6,27 +6,26 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { inputValue: '' };
+    this.state = { input: '' };
   }
 
-  clearInput = () => this.setState({ inputValue: '' });
+  clearInput = () => {
+    this.setState({ input: '' });
+    this.props.updateInputValue('');
+  }
 
   updateInputValue = (e) => {
-    const inputValue = e.target.value;
-
-    this.setState({ inputValue });
-
-    if (inputValue > 0 && inputValue <= 721) {
-      this.props.updateInputValue(inputValue);
-    }
+    const input = e.target.value;
+    this.setState({ input });
+    this.props.updateInputValue(input);
   };
 
   render() {
-    const clear = this.state.inputValue
+    const clear = this.state.input
       ? <button className='clear' onClick={this.clearInput}>Clear</button>
       : null;
 
-    const error = (this.state.inputValue < 0 || this.state.inputValue > 721)
+    const error = this.props.badInput
       ? <span className='error'>Search a number 1 to 721</span>
       : null;
 
@@ -39,7 +38,7 @@ export default class Search extends Component {
             onChange={this.updateInputValue}
             pattern='[0-9]*'
             type='number'
-            value={this.state.inputValue}
+            value={this.state.input}
           />
           {clear}
         </div>
@@ -49,4 +48,7 @@ export default class Search extends Component {
   }
 }
 
-Search.propTypes = { updateInputValue: PropTypes.func.isRequired };
+Search.propTypes = {
+  badInput: PropTypes.bool.isRequired,
+  updateInputValue: PropTypes.func.isRequired
+};

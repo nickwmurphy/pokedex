@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 
-const Card = ({ pokemon }) => {
-  if (!pokemon) {
-    return <div className='spinner' />;
-  }
+const Card = ({
+  hasInput,
+  isLoading,
+  pokemon
+}) => {
+  if (!hasInput || !pokemon) return <div>No Results</div>;
+
+  if (isLoading) return <div className='spinner' />;
 
   const back = <img width='150px' alt='' src={pokemon.sprites.back_default} />;
 
@@ -28,7 +32,11 @@ const Card = ({ pokemon }) => {
   );
 };
 
-Card.propTypes = { pokemon: PropTypes.shape() };
+Card.propTypes = {
+  hasInput: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  pokemon: PropTypes.shape()
+};
 
 Card.defaultProps = { pokemon: null };
 
