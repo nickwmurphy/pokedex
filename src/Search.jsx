@@ -1,46 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 
-const Search = ({
-  badInput,
-  clearInput,
-  hasInput,
-  inputValue,
-  updateInputValue
-}) => {
+export default class Search extends Component {
+  constructor(props) {
+    super(props);
 
-  const clear = <button className='clear' onClick={clearInput}>Clear</button>
+    this.state = { inputValue: '' };
+  }
 
-  const error = (hasInput && badInput)
-    ? <span className='error'>Search a number 1 to 721</span>
-    : null;
+  clearInput = () => this.setState({ inputValue: '' });
 
-  return (
-    <div className='search'>
-      <span>Search a Pokemon by number:</span>
-      <div>
-        <input className='input'
-          onChange={updateInputValue}
-          pattern='[0-9]*'
-          type='number'
-          value={inputValue}
-        />
-        {clear}
+  updateInputValue = (e) => {
+    const inputValue = e.target.value;
+
+    this.setState({ inputValue });
+
+    if (inputValue > 0 && inputValue <= 721) {
+      this.props.updateInputValue(inputValue);
+    }
+  };
+
+  render() {
+    const clear = this.state.inputValue
+      ? <button className='clear' onClick={this.clearInput}>Clear</button>
+      : null;
+
+    const error = (this.state.inputValue < 0 || this.state.inputValue > 721)
+      ? <span className='error'>Search a number 1 to 721</span>
+      : null;
+
+    return (
+      <div className='search'>
+        <span>Search a Pokemon by number:</span>
+        <div>
+          <input
+            className='input'
+            onChange={this.updateInputValue}
+            pattern='[0-9]*'
+            type='number'
+            value={this.state.inputValue}
+          />
+          {clear}
+        </div>
+        {error}
       </div>
-      {error}
-    </div>
-  );
-};
+    );
+  }
+}
 
-Search.propTypes = {
-  badInput: PropTypes.bool.isRequired,
-  clearInput: PropTypes.func.isRequired,
-  hasInput: PropTypes.bool.isRequired,
-  inputValue: PropTypes.string,
-  updateInputValue: PropTypes.func.isRequired
-};
-
-Search.defaultProps = { };
-
-export default Search;
+Search.propTypes = { updateInputValue: PropTypes.func.isRequired };

@@ -2,22 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 
-const Card = ({
-  backSprite,
-  frontSprite,
-  name,
-  type
-}) => {
+const Card = ({ pokemon }) => {
+  if (!pokemon) {
+    return <div className='spinner' />;
+  }
 
-  const back = <img width='150px' alt='' src={backSprite}/>;
+  const back = <img width='150px' alt='' src={pokemon.sprites.back_default} />;
 
   const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
-  const front = <img width='150px' alt='' src={frontSprite}/>;
+  const front = <img width='150px' alt='' src={pokemon.sprites.front_default} />;
 
   const label = (<div className='label'>
-      {`${capitalize(name)} - ${capitalize(type)}`}
-    </div>);
+    {`${capitalize(pokemon.name)} - ${capitalize(pokemon.types[0].type.name)}`}
+  </div>);
 
   return (
     <div className='card'>
@@ -30,13 +28,8 @@ const Card = ({
   );
 };
 
-Card.propTypes = {
-  backSprite: PropTypes.string,
-  frontSprite: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string
-};
+Card.propTypes = { pokemon: PropTypes.shape() };
 
-Card.defaultProps = { };
+Card.defaultProps = { pokemon: null };
 
 export default Card;
