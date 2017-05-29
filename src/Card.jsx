@@ -7,27 +7,28 @@ const Card = ({
   isLoading,
   pokemon
 }) => {
-  if (!hasInput || !pokemon) return <div>No Results</div>;
+  if ((!hasInput || !pokemon) && !isLoading) return <div>No Results</div>;
 
   if (isLoading) return <div className='spinner' />;
 
-  const back = <img width='150px' alt='' src={pokemon.sprites.back_default} />;
-
   const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
-  const front = <img width='150px' alt='' src={pokemon.sprites.front_default} />;
+  const name = capitalize(pokemon.name);
+  const type = capitalize(pokemon.types[0].type.name);
+  const frontSprite = pokemon.sprites.front_default;
+  const backSprite = pokemon.sprites.back_default;
 
-  const label = (<div className='label'>
-    {`${capitalize(pokemon.name)} - ${capitalize(pokemon.types[0].type.name)}`}
+  const label = <div className='label'>{`${name} - ${type}`}</div>;
+
+  const sprites = (<div className='sprites'>
+    <img alt='' src={frontSprite} width='150px' />
+    <img alt='' src={backSprite} width='150px' />
   </div>);
 
   return (
     <div className='card'>
       {label}
-      <div className='sprites'>
-        {front}
-        {back}
-      </div>
+      {sprites}
     </div>
   );
 };

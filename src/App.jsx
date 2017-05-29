@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import _ from 'lodash';
 import Card from './Card';
-import Search from './Search';
+import SearchBar from './SearchBar';
 import './App.css';
+
+const API = 'https://pokeapi.co/api/v2/pokemon';
 
 export default class App extends Component {
   constructor(props) {
@@ -20,7 +22,6 @@ export default class App extends Component {
   search = (input) => {
     this.setState({ isLoading: true });
 
-    const API = 'https://pokeapi.co/api/v2/pokemon';
     const hasInput = input !== '';
     const badInput = hasInput && (input < 1 || input > 721);
 
@@ -31,26 +32,27 @@ export default class App extends Component {
           this.setState({ badInput, hasInput, isLoading: false, pokemon });
         });
     } else {
-      this.setState({ badInput, hasInput, isLoading: false });
+      this.setState({ badInput, hasInput, isLoading: false, pokemon: null });
     }
   };
 
   render() {
-    const updateInputValue = _.debounce(input => this.search(input), 300);
+    const search = _.debounce(input => this.search(input), 500);
 
     const card = (<Card
       hasInput={this.state.hasInput}
       isLoading={this.state.isLoading}
       pokemon={this.state.pokemon}
     />);
-    const search = (<Search
+
+    const searchBar = (<SearchBar
       badInput={this.state.badInput}
-      updateInputValue={updateInputValue}
+      search={search}
     />);
 
     return (
       <div className='container'>
-        {search}
+        {searchBar}
         {card}
       </div>
     );

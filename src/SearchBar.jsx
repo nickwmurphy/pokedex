@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 
-export default class Search extends Component {
+export default class SearchBar extends Component {
   constructor(props) {
     super(props);
 
@@ -11,13 +11,13 @@ export default class Search extends Component {
 
   clearInput = () => {
     this.setState({ input: '' });
-    this.props.updateInputValue('');
+    this.props.search('');
   }
 
   updateInputValue = (e) => {
     const input = e.target.value;
     this.setState({ input });
-    this.props.updateInputValue(input);
+    this.props.search(input);
   };
 
   render() {
@@ -48,7 +48,7 @@ export default class Search extends Component {
   }
 }
 
-Search.propTypes = {
+SearchBar.propTypes = {
   badInput: PropTypes.bool.isRequired,
-  updateInputValue: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired
 };
