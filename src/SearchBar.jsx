@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ export default class SearchBar extends Component {
     this.props.search('');
   }
 
-  updateInputValue = (e) => {
+  search = (e) => {
     const input = e.target.value;
     this.setState({ input });
     this.props.search(input);
@@ -34,8 +33,9 @@ export default class SearchBar extends Component {
         <span>Search a Pokemon by number:</span>
         <div>
           <input
+            autoFocus
             className='input'
-            onChange={this.updateInputValue}
+            onChange={this.search}
             pattern='[0-9]*'
             type='number'
             value={this.state.input}

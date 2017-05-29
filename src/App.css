@@ -1,3 +1,10 @@
+body {
+  background: #f7f7f7;
+  font-family: sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -7,8 +14,13 @@
 .clear {
   background: #f7f7f7;
   border-width: 0;
+  font-size: 13px;
   color: blue;
   margin-left: 20px;
+}
+
+.clear:focus {
+  outline: none;
 }
 
 .container {
@@ -30,6 +42,10 @@
   margin-top: 20px;
   padding: 2px 5px;
   width: 120px;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .label {

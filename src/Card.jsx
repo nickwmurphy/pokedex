@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 
 const Card = ({
   hasInput,
@@ -13,10 +12,10 @@ const Card = ({
 
   const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
+  const backSprite = pokemon.sprites.back_default;
+  const frontSprite = pokemon.sprites.front_default;
   const name = capitalize(pokemon.name);
   const type = capitalize(pokemon.types[0].type.name);
-  const frontSprite = pokemon.sprites.front_default;
-  const backSprite = pokemon.sprites.back_default;
 
   const label = <div className='label'>{`${name} - ${type}`}</div>;
 
