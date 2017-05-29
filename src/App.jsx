@@ -37,7 +37,7 @@ export default class App extends Component {
   };
 
   render() {
-    const search = _.debounce(input => this.search(input), 500);
+    const search = _.debounce(input => this.search(input), 300);
 
     const card = (<Card
       hasInput={this.state.hasInput}
